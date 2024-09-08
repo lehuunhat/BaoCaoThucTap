@@ -1,0 +1,89 @@
+﻿@model HienTangToc.Models.NguoimuonModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Đăng ký Mượn tóc";
+}
+@{
+    var successMessage = TempData["SuccessMessage"] as string;
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Example</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <script src="~/js/site.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">
+        @successMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+<form method="post" asp-action="Muontoc" asp-controller="From">
+    <h2>Đăng Ký Người Mượn Tóc</h2>
+    <div>
+        <label for="Hoten">Họ Tên:</label>
+        <input type="text" id="Hoten" name="Hoten" asp-for="Hoten" required />
+        <span asp-validation-for="Hoten"></span>
+    </div>
+    <div>
+        <label for="Sdt">Số Điện Thoại:</label>
+        <input type="text" id="Sdt" name="Sdt" asp-for="Sdt" required />
+        <span asp-validation-for="Sdt"></span>
+    </div>
+    <div>
+        <label for="Diachi">Địa Chỉ:</label>
+        <input type="text" id="Diachi" name="Diachi" asp-for="Diachi" required />
+        <span asp-validation-for="Diachi"></span>
+    </div>
+    <div>
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" asp-for="Email" required />
+        <span asp-validation-for="Email"></span>
+    </div>
+    <div>
+        <label for="Gioitinh">Giới Tính:</label>
+        <select class="form-control" id="Gioitinh" name="Gioitinh" asp-for="Gioitinh" required>
+            <option value="0">Nam</option>
+            <option value="1">Nữ</option>
+        </select>
+        <span asp-validation-for="Gioitinh"></span>
+    </div>
+    <div>
+        <label for="Ngaysinh">Ngày Sinh:</label>
+        <input type="date" id="Ngaysinh" name="Ngaysinh" asp-for="Ngaysinh" required />
+        <span asp-validation-for="Ngaysinh"></span>
+    </div>
+    <div>
+        <label for="Nguyennhan">Nguyên Nhân:</label>
+        <input type="text" id="Nguyennhan" name="Nguyennhan" asp-for="Nguyennhan" required />
+        <span asp-validation-for="Nguyennhan"></span>
+    </div>
+    <div>
+        <label for="Ngaydangky">Ngày Đăng Ký:</label>
+        <input type="date" id="Ngaydangky" name="Ngaydangky" asp-for="Ngaydangky" required />
+        <span asp-validation-for="Ngaydangky"></span>
+    </div>
+    <div>
+        <label for="Ngaytra">Ngày Trả:</label>
+        <input type="date" id="Ngaytra" name="Ngaytra" asp-for="Ngaytra" required />
+        <span asp-validation-for="Ngaytra"></span>
+    </div>
+    <button type="submit">Đăng Ký</button>
+</form>
+

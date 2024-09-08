@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Đăng ký Salon tóc";
+}
+@model HienTangToc.Models.SalonModel
+
+@{
+    var successMessage = TempData["SuccessMessage"] as string;
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart.js Example</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <script src="~/js/site.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <div class="alert alert-success">
+        @successMessage
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">
+        @errorMessage
+    </div>
+}
+
+<form method="post" asp-action="Salontoc" asp-controller="From" enctype="multipart/form-data">
+    <h2>Đăng Ký Salon</h2>
+    <div>
+        <label for="Ten">Tên:</label>
+        <input type="text" id="Ten" name="Ten" asp-for="Ten" required />
+        <span asp-validation-for="Ten"></span>
+    </div>
+    <div>
+        <label for="Image">Hình Ảnh:</label>
+        <input type="file" id="Image" name="Image" accept="image/*" />
+        <span asp-validation-for="Image"></span>
+    </div>
+    <div>
+        <label for="Diachi">Địa Chỉ:</label>
+        <input type="text" id="Diachi" name="Diachi" asp-for="Diachi" required />
+        <span asp-validation-for="Diachi"></span>
+    </div>
+    <div>
+        <label for="Facebook">Facebook:</label>
+        <input type="text" id="Facebook" name="Facebook" asp-for="Facebook" required />
+        <span asp-validation-for="Facebook"></span>
+    </div>
+    <div>
+        <label for="Thoigianhd">Thời Gian Hoạt Động:</label>
+        <input type="text" id="Thoigianhd" name="Thoigianhd" asp-for="Thoigianhd" required />
+        <span asp-validation-for="Thoigianhd"></span>
+    </div>
+    <div>
+        <label for="Uudai">Ưu Đãi:</label>
+        <input type="text" id="Uudai" name="Uudai" asp-for="Uudai" required />
+        <span asp-validation-for="Uudai"></span>
+    </div>
+    <button type="submit">Đăng Ký</button>
+</form>

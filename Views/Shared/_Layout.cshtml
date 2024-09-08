@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-left">
+                <div class="logo">
+                    <img src="~/image/logo.png" alt="Logo" />
+                </div>
+                <ul class="nav-links">
+                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li class="dropdown">
+                        <a>Thư viện tóc</a>
+                        <ul class="dropdown-menu">
+                            @if (ViewData["UserName"] != null)
+                            {
+                                <li><a asp-controller="From" asp-action="Hientoc">Đăng ký hiến tóc</a></li>
+                                <li><a asp-controller="From" asp-action="Muontoc">Đăng ký mượn tóc</a></li>
+                                <li><a asp-controller="From" asp-action="Salontoc">Đăng ký salon tóc</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Login" asp-action="Login">Đăng ký hiến tóc</a></li>
+                                <li><a asp-controller="Login" asp-action="Login">Đăng ký mượn tóc</a></li>
+                                <li><a asp-controller="Login" asp-action="Login">Đăng ký salon tóc</a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a>Salon</a>
+                        <ul class="dropdown-menu">
+                            @if (ViewBag.Salons != null)
+                            {
+                                foreach (var salon in (List<HienTangToc.Models.SalonModel>)ViewBag.Salons)
+                                {
+                                    <li><a asp-controller="Home" asp-action="Salon" asp-route-id="@salon.Idsl">@salon.Ten</a></li>
+                                }
+                            }
+                            else
+                            {
+                                <li><a href="#">Không có salon</a></li>
+                            }
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="nav-right">
+                @if (ViewData["UserName"] != null)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Hello, @ViewData["UserName"]!
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" asp-controller="User" asp-action="Profile">Profile</a>
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
+                            <form id="logout-form" asp-controller="Logout" asp-action="Logout" method="post" style="display: none;">
+                            </form>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <a asp-controller="Login" asp-action="Login">Đăng nhập</a>
+                }
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+    <footer class="text-center text-lg-start text-muted mt-3" style="background-color: #f5f5f5;">
+        <section class="">
+            <div class="container text-center text-md-start pt-4 pb-4">
+                <div class="row mt-3">
+                    <div class="col-12 col-lg-3 col-sm-12 mb-2">
+                        <a href="https://mdbootstrap.com/" target="_blank" class="">
+                            <img src="~/image/logo.png" width="70" height="70" />
+                        </a>
+                        <p class="mt-2 text-dark">
+                            Mạng lưới Ung thư vú Việt Nam là một thành viên của Hiệp hội Phòng chống Ung thư Quốc tế, hoạt động với mục đích tăng cường phát hiện sớm ung thư vú và nâng cao chất lượng sống cho phụ nữ trong cộng đồng.
+                        </p>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <h6 class="text-uppercase text-dark fw-bold mb-2">
+                            Liên hệ
+                        </h6>
+                        <ul class="list-unstyled mb-4">
+                            <li><a class="text-muted" href="#">Lầu 1, Số 122/11 Phổ Quang, P.9, Q. Phú Nhuận, TP. Hồ Chí Minh</a></li>
+                            <li><a class="text-muted" href="#">(+84) 961 924 300</a></li>
+                            <li><a class="text-muted" href="#">pinkteam@bcnv.org.vn</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <h6 class="text-uppercase text-dark fw-bold mb-2">
+                            Ủng hộ BCNV
+                        </h6>
+                        <ul class="list-unstyled mb-4">
+                            <li><a class="text-muted" href="#">Gây quỹ cộng đồng</a></li>
+                            <li><a class="text-muted" href="#">BCNV Store</a></li>
+                            <li><a class="text-muted" href="#">Các địa điểm bán hàng gây quỹ</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <h6 class="text-uppercase text-dark fw-bold mb-2">
+                            Thông tin
+                        </h6>
+                        <ul class="list-unstyled mb-4">
+                            <li><a class="text-muted" href="#">Tìm hiểu về ung thư vú</a></li>
+                            <li><a class="text-muted" href="#">Điều trị ung thu vú</a></li>
+                            <li><a class="text-muted" href="#">Hỏi đáp về ung thư vú</a></li>
+                            <li><a class="text-muted" href="#">Câu truyện truyền cảm hứng</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-12 col-sm-12 col-lg-3">
+                        <h6 class="text-uppercase text-dark fw-bold mb-2">Gia Nhập </h6>
+                        <p class="text-muted">Hãy nhập email của bạn vào đây</p>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control border" placeholder="Email" aria-label="Email" aria-describedby="button-addon2" />
+                            <button class="btn btn-light border shadow-0" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                                Join
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <div class="">
+            <div class="container">
+                <div class="d-flex justify-content-between py-4 border-top">
+                    <div>
+                        <i class="fab fa-lg fa-cc-visa text-dark"></i>
+                        <i class="fab fa-lg fa-cc-amex text-dark"></i>
+                        <i class="fab fa-lg fa-cc-mastercard text-dark"></i>
+                        <i class="fab fa-lg fa-cc-paypal text-dark"></i>
+                    </div>
+                   
+                    <div class="back-to-top">
+                        <a href="#" id="Top" class="scroll-link">Back to Top ^</a>
+                    </div>
+
+                    <style>
+                        .back-to-top {
+                            position: fixed;
+                            bottom: 20px;
+                            right: 20px;
+                        }
+
+                        .scroll-link {
+                            display: none; 
+                            font-size: 16px;
+                            text-decoration: underline;
+                            color: #007bff;
+                            cursor: pointer;
+                        }
+
+                            .scroll-link:hover {
+                                color: #0056b3;
+                            }
+                    </style>
+                    <script>
+                        const Top = document.getElementById("Top");
+
+                        window.onscroll = function () {
+                            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                                Top.style.display = "block";
+                            } else {
+                                Top.style.display = "none";
+                            }
+                        };
+
+                        Top.addEventListener("click", function (e) {
+                            e.preventDefault();
+                            window.scrollTo({
+                                top: 0,
+                                behavior: "smooth"
+                            });
+                        });
+                    </script>
+</body>
+</html>

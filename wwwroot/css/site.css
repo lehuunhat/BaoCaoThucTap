@@ -1,0 +1,21 @@
+﻿/* Căn chỉnh nội dung về phía bên trái */
+body {
+    text-align: left;
+}
+
+.container {
+    text-align: left;
+}
+
+h1, p {
+    text-align: left;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+.carousel-inner {
+    text-align: left;
+}

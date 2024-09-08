@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Admin Dashboard</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/js/site.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            background-color: deeppink;
+            position: fixed;
+            top: 0;
+            left: 0;
+            transition: transform 0.3s ease;
+            transform: translateX(-100%);
+        }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .sidebar a {
+                color: white;
+                padding: 15px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    background-color: darkviolet;
+                }
+
+        .main-content {
+            margin-left: 260px; /* Adjust based on sidebar width */
+            padding: 20px;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: deeppink;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .navbar {
+            padding: 0 15px;
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a asp-controller="Admin" asp-action="Admin">Home</a></li>
+                    @if (ViewData["UserName"] != null)
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Hello, @ViewData["UserName"]!
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" asp-controller="User" asp-action="Profile">Profile</a>
+                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Đăng xuất</a>
+                                <form id="logout-form" asp-controller="Logout" asp-action="Logout" method="post" style="display: none;">
+                                </form>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <a asp-controller="Login" asp-action="Login">Đăng nhập</a>
+                    }
+                </ul>
+            </div>
+        </nav>
+
+        <div class="sidebar" id="sidebar">
+            <button class="toggle-btn" onclick="toggleSidebar()">&larr;</button>
+            <br><br><br>
+            <a href="ttuser">Thông tin tài khoản</a>
+            <a href="nguoimuon">Thông tin người mượn</a>
+            <a href="nguoihien">Thông tin người hiến</a>
+            <a href="salon">Thông tin salon</a>
+        </div>
+    </header>
+    <div class="main-content">
+        @RenderBody()
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

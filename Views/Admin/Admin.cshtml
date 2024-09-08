@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "Admin Dashboard";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Thống kê</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card bg-light">
+                    <h5>Số người mượn</h5>
+                    <p>@ViewData["SoNguoiMuon"]</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light">
+                    <h5>Số người Hiến</h5>
+                    <p>@ViewData["SoNguoiHien"]</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light">
+                    <h5>Số salon</h5>
+                    <p>@ViewData["SoSalon"]</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card bg-light">
+                    <h5>Số Tóc</h5>
+                    <p>@ViewData["SoToc"]</p>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <h5>Thống kê</h5>
+                    <canvas id="myAreaChart"></canvas>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <h5>Biểu đồ thống kê</h5>
+                    <canvas id="myPieChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctxAreaChart = document.getElementById("myAreaChart").getContext('2d');
+        var myAreaChart = new Chart(ctxAreaChart, {
+            type: 'line',
+            data: {
+                labels: ["Người Hiến", "Người Mượn", "Salon"],
+                datasets: [{
+                    label: "Số người",
+                    data: [
+        @ViewData["SoNguoiHien"],
+        @ViewData["SoNguoiMuon"],
+        @ViewData["SoSalon"]
+                        ],
+                    backgroundColor: "rgba(78, 115, 223, 0.05)",
+                    borderColor: "rgba(78, 115, 223, 1)"
+                }]
+            }
+        });
+
+        var ctxPieChart = document.getElementById("myPieChart").getContext('2d');
+        var myPieChart = new Chart(ctxPieChart, {
+            type: 'doughnut',
+            data: {
+                labels: ["Người Hiến", "Người Mượn", "Salon"],
+                datasets: [{
+                    data: [
+        @ViewData["SoNguoiHien"],
+        @ViewData["SoNguoiMuon"],
+        @ViewData["SoSalon"]
+                        ],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                    hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+                    hoverBorderColor: "rgba(234, 236, 244, 1)"
+                }]
+            }
+        });
+    </script>
+</body>
+</html>

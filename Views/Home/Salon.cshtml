@@ -1,0 +1,89 @@
+﻿@model HienTangToc.Models.SalonModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@Model?.Ten</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #343a40;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .card-body p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .card-body a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+            .card-body a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@Model?.Ten</h1>
+        @if (Model != null)
+        {
+            <div class="card">
+                <img src="@Model.Image" alt="@Model.Ten" class="img-fluid card-img-top" />
+                <div class="card-body">
+                    <p><strong>Địa chỉ:</strong> @Model.Diachi</p>
+                    <p><strong>Facebook:</strong> <a href="@Model.Facebook" target="_blank">@Model.Facebook</a></p>
+                    <p><strong>Thời gian hoạt động:</strong> @Model.Thoigianhd</p>
+                    <p><strong>Ưu đãi:</strong> @Model.Uudai</p>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p class="text-center">Thông tin salon không có.</p>
+        }
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

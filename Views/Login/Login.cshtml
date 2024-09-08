@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="~/css/site.css" /> <!-- Kết nối với file CSS -->
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" />
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <section class="vh-100">
+        <div class="container-fluid h-custom">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-9 col-lg-6 col-xl-5">
+                    <img src="~/image/Login.jpg" class="img-fluid" alt="Sample image">
+                </div>
+                <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+                        <form method="post" asp-action="Login" asp-controller="Login">
+                        <div class="login-form">
+                            <h2>Đăng Nhập</h2>
+                            <div>
+                                <label for="EmailOrPhone">Email hoặc Số Điện Thoại:</label>
+                                <input type="text" id="EmailOrPhone" name="emailOrPhone" required />
+                            </div>
+                            <div>
+                                <label for="Password">Mật Khẩu:</label>
+                                <input type="password" id="Password" name="password" required />
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Checkbox -->
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input me-2" type="checkbox" value="" id="chk" />
+                                    <label class="form-check-label" for="form2Example3">Show Password</label>
+                                </div>
+                                <script>
+                                    const pwd = document.getElementById("Password");
+                                    const chk = document.getElementById("chk");
+
+                                    chk.onchange = function (e) {
+                                        pwd.type = chk.checked ? "text" : "password";
+                                    };
+                                </script>
+                            </div>
+                            <button type="submit">Đăng Nhập</button>
+                        
+
+                        @if (ViewData.ModelState.Values.Any(v => v.Errors.Count > 0))
+                        {
+                            <div class="error-message">
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <p>@error.ErrorMessage</p>
+                                }
+                            </div>
+                        }
+
+                        <p>
+                            Bạn chưa có tài khoản? <a asp-controller="Register" asp-action="Register">Đăng ký tại đây</a>
+                        </p>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
